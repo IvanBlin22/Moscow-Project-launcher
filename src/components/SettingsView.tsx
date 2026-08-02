@@ -20,7 +20,7 @@ export default function SettingsView() {
         {/* Graphics */}
         <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Monitor size={18} className="text-gold-300" />
+            <Monitor size={18} className="text-brand-300" />
             <h2 className="font-display text-lg font-bold text-white">Графика</h2>
           </div>
 
@@ -32,7 +32,7 @@ export default function SettingsView() {
                 onClick={() => setResolution(r)}
                 className={`rounded-lg px-3 py-1.5 font-mono text-xs transition ${
                   resolution === r
-                    ? 'bg-gold-400 text-ink-950'
+                    ? 'bg-brand-500 text-white'
                     : 'bg-ink-800 text-ink-300 hover:bg-ink-700'
                 }`}
               >
@@ -45,7 +45,7 @@ export default function SettingsView() {
             <span className="text-sm text-ink-200">Полноэкранный режим</span>
             <button
               onClick={() => setFullscreen((v) => !v)}
-              className={`relative h-6 w-11 rounded-full transition ${fullscreen ? 'bg-gold-400' : 'bg-ink-600'}`}
+              className={`relative h-6 w-11 rounded-full transition ${fullscreen ? 'bg-brand-500' : 'bg-ink-600'}`}
             >
               <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${fullscreen ? 'left-[22px]' : 'left-0.5'}`} />
             </button>
@@ -55,7 +55,7 @@ export default function SettingsView() {
         {/* Audio */}
         <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Volume2 size={18} className="text-gold-300" />
+            <Volume2 size={18} className="text-brand-300" />
             <h2 className="font-display text-lg font-bold text-white">Звук</h2>
           </div>
 
@@ -66,7 +66,7 @@ export default function SettingsView() {
             max={100}
             value={volume}
             onChange={(e) => setVolume(Number(e.target.value))}
-            className="w-full accent-gold-400"
+            className="w-full accent-brand-500"
           />
           <div className="mt-4 flex items-center justify-between rounded-lg bg-ink-800 px-4 py-3">
             <span className="text-sm text-ink-200">Автообновление</span>
@@ -82,7 +82,7 @@ export default function SettingsView() {
         {/* Game folder */}
         <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Folder size={18} className="text-gold-300" />
+            <Folder size={18} className="text-brand-300" />
             <h2 className="font-display text-lg font-bold text-white">Папка игры</h2>
           </div>
           <div className="rounded-lg border border-white/5 bg-ink-900 p-3 font-mono text-xs text-ink-300">
@@ -96,13 +96,13 @@ export default function SettingsView() {
         {/* About */}
         <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Info size={18} className="text-gold-300" />
+            <Info size={18} className="text-brand-300" />
             <h2 className="font-display text-lg font-bold text-white">О лаунчере</h2>
           </div>
           <dl className="space-y-2 text-sm">
             {[
-              ['Версия', '1.8.0'],
-              ['Сборка', '2026.07.30'],
+              ['Версия', '2'],
+              ['Сборка', '2026.08.02'],
               ['Платформа', 'Windows'],
               ['Лицензия', 'Moscow Project'],
             ].map(([k, v]) => (
@@ -116,7 +116,7 @@ export default function SettingsView() {
 
         {/* Save bar */}
         <div className="col-span-2 flex justify-end">
-          <button className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3 font-display text-sm font-bold text-ink-950 transition hover:from-gold-300 hover:to-gold-400">
+          <button className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-400 to-brand-500 px-6 py-3 font-display text-sm font-bold text-white transition hover:from-brand-300 hover:to-brand-400">
             <Check size={16} />
             Сохранить настройки
           </button>

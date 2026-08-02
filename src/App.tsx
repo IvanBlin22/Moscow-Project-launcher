@@ -9,7 +9,7 @@ import MediaView from './components/MediaView'
 import CommunityView from './components/CommunityView'
 import SettingsView from './components/SettingsView'
 import PlayBar from './components/PlayBar'
-import { Loader2 } from 'lucide-react'
+import { Loader as Loader2 } from 'lucide-react'
 
 export default function App() {
   const [view, setView] = useState<View>('home')
@@ -34,7 +34,7 @@ export default function App() {
     return (
       <div className="flex h-screen w-screen items-center justify-center bg-ink-950">
         <div className="text-center">
-          <Loader2 size={32} className="mx-auto animate-spin text-gold-400" />
+          <Loader2 size={32} className="mx-auto animate-spin text-brand-400" />
           <p className="mt-4 font-display text-sm text-ink-300">Загрузка лаунчера…</p>
         </div>
       </div>

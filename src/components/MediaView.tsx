@@ -1,4 +1,5 @@
 import type { MediaRow } from '../supabase'
+import { ImageOff } from 'lucide-react'
 
 export default function MediaView({ media }: { media: MediaRow[] }) {
   const gallery = media.length > 0 ? media : []
@@ -11,7 +12,11 @@ export default function MediaView({ media }: { media: MediaRow[] }) {
       </div>
 
       {gallery.length === 0 ? (
-        <p className="text-sm text-ink-400">Медиа пока нет.</p>
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-ink-850 py-20">
+          <ImageOff size={40} className="text-ink-600" />
+          <p className="mt-4 font-display text-lg text-ink-200">Здесь пока ничего нет</p>
+          <p className="mt-1 text-sm text-ink-400">Скриншоты и видео появятся позже. Заготовка для загрузки готова.</p>
+        </div>
       ) : (
         <div className="columns-3 gap-4 [&>*]:mb-4">
           {gallery.map((item, i) => (

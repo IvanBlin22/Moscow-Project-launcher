@@ -1,8 +1,9 @@
 import { formatDate } from '../useLauncherData'
 import type { NewsRow } from '../supabase'
+import { Newspaper } from 'lucide-react'
 
 const categoryColor: Record<string, string> = {
-  'Обновление': 'bg-gold-400/15 text-gold-300 border-gold-400/20',
+  'Обновление': 'bg-brand-400/15 text-brand-300 border-brand-400/20',
   'Событие': 'bg-accent-400/15 text-accent-400 border-accent-400/20',
   'Новость': 'bg-blue-400/15 text-blue-300 border-blue-400/20',
   'Акция': 'bg-pink-400/15 text-pink-300 border-pink-400/20',
@@ -17,7 +18,11 @@ export default function NewsView({ news }: { news: NewsRow[] }) {
       </div>
 
       {news.length === 0 ? (
-        <p className="text-sm text-ink-400">Новостей пока нет.</p>
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-ink-850 py-20">
+          <Newspaper size={40} className="text-ink-600" />
+          <p className="mt-4 font-display text-lg text-ink-200">Новостей пока нет</p>
+          <p className="mt-1 text-sm text-ink-400">Как только появится новая информация, она отобразится здесь.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-2 gap-5">
           {news.map((item, i) => (
@@ -40,7 +45,7 @@ export default function NewsView({ news }: { news: NewsRow[] }) {
                 <span className="font-mono text-[11px] text-ink-400">{formatDate(item.published_at)}</span>
                 <h3 className="mt-1.5 font-display text-lg font-bold text-white">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-300">{item.excerpt}</p>
-                <button className="mt-4 flex items-center gap-1 text-sm font-medium text-gold-300 transition hover:text-gold-200">
+                <button className="mt-4 flex items-center gap-1 text-sm font-medium text-brand-300 transition hover:text-brand-200">
                   Читать далее →
                 </button>
               </div>

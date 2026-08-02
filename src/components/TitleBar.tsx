@@ -4,14 +4,14 @@ export default function TitleBar() {
   return (
     <div className="flex h-9 items-center justify-between border-b border-white/5 bg-ink-900 px-3 select-none">
       <div className="flex items-center gap-2">
-        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-gradient-to-br from-gold-300 to-gold-600">
-          <span className="font-display text-[10px] font-bold text-ink-950">M</span>
+        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-gradient-to-br from-brand-300 to-brand-600">
+          <span className="font-display text-[10px] font-bold text-white">M</span>
         </div>
         <span className="font-display text-xs font-semibold tracking-wide text-ink-200">
           MOSCOW PROJECT
         </span>
         <span className="ml-1 rounded-full bg-white/5 px-1.5 py-0.5 font-mono text-[9px] text-ink-400">
-          v1.8.0
+          v2
         </span>
       </div>
       <div className="flex items-center gap-1">

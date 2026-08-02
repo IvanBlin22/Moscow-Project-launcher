@@ -1,4 +1,4 @@
-import { Play, Users, Signal, TrendingUp, Clock, ChevronRight } from 'lucide-react'
+import { Play, Users, Signal, TrendingUp, Clock, ChevronRight, Server, Wifi } from 'lucide-react'
 import { formatBytes } from '../useLauncherData'
 import type { ServerRow, NewsRow, LauncherStatRow } from '../supabase'
 
@@ -8,6 +8,12 @@ const STAT_ICONS: Record<string, typeof Users> = {
   TrendingUp: TrendingUp,
   Clock: Clock,
 }
+
+const SOCIALS = [
+  { name: 'Discord', desc: 'Наш сервер', url: 'https://discord.gg/gtamproject', color: 'bg-[#5865F2]', letter: 'D' },
+  { name: 'Форум', desc: 'forum.gtamproject.ru', url: 'https://forum.gtamproject.ru/index.php', color: 'bg-brand-500', letter: 'F' },
+  { name: 'VK', desc: 'vk.ru/gta_mproject', url: 'https://vk.ru/gta_mproject', color: 'bg-[#0077FF]', letter: 'V' },
+]
 
 export default function HomeView({
   servers,
@@ -33,29 +39,27 @@ export default function HomeView({
     <div className="relative">
       {/* Hero */}
       <div className="relative h-[360px] overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${featured?.image_url ?? ''})` }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-ink-900 via-brand-900/40 to-ink-950" />
+        <div className="absolute inset-0 noise opacity-[0.03]" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/80 via-transparent to-transparent" />
 
         <div className="relative flex h-full flex-col justify-end p-8">
           <div className="animate-fade-up">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-gold-400/20 bg-gold-400/10 px-3 py-1">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-400/20 bg-brand-400/10 px-3 py-1">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-300 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-300" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-300 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-300" />
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-gold-200">
-                Обновление 1.8.0 уже доступно
+              <span className="font-mono text-[10px] uppercase tracking-widest text-brand-200">
+                Лаунчер v2 · Готов к игре
               </span>
             </div>
             <h1 className="font-display text-5xl font-extrabold leading-tight text-white">
-              Добро пожаловать в <span className="text-gradient-gold">Moscow Project</span>
+              Добро пожаловать в <span className="text-gradient-brand">Moscow Project</span>
             </h1>
             <p className="mt-2 max-w-xl text-base text-ink-200">
-              {featured?.excerpt ?? 'Новый район Останкино, 14 машин, переработанная экономика и система гаражей. Заходи и играй.'}
+              Подключайтесь к серверу и начните играть прямо сейчас.
             </p>
           </div>
         </div>
@@ -69,7 +73,7 @@ export default function HomeView({
           <div className="grid grid-cols-4 gap-3">
             {homeStats.map((s, i) => {
               const Icon = STAT_ICONS[s.icon ?? ''] ?? Users
-              const color = i === 0 ? 'text-accent-400' : i === 1 ? 'text-gold-300' : 'text-ink-100'
+              const color = i === 0 ? 'text-accent-400' : i === 1 ? 'text-brand-300' : 'text-ink-100'
               return (
                 <div
                   key={s.id}
@@ -88,7 +92,7 @@ export default function HomeView({
           <div>
             <div className="mb-3 flex items-center justify-between">
               <h2 className="font-display text-lg font-bold text-white">Серверы</h2>
-              <span className="font-mono text-xs text-ink-500">Выберите сервер</span>
+              <span className="font-mono text-xs text-ink-500">Подключение</span>
             </div>
             <div className="space-y-2">
               {servers.map((s, i) => {
@@ -100,7 +104,7 @@ export default function HomeView({
                     onClick={() => onSelectServer(i)}
                     className={`group flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-all ${
                       active
-                        ? 'border-gold-400/30 bg-gold-400/[0.06] shadow-glow'
+                        ? 'border-brand-400/30 bg-brand-400/[0.06] shadow-glow'
                         : 'border-white/5 bg-ink-850 hover:border-white/10'
                     }`}
                   >
@@ -123,7 +127,7 @@ export default function HomeView({
                           </div>
                           <div className="h-1 overflow-hidden rounded-full bg-ink-700">
                             <div
-                              className={`h-full rounded-full ${fillPct > 80 ? 'bg-gold-400' : 'bg-accent-400'}`}
+                              className={`h-full rounded-full ${fillPct > 80 ? 'bg-brand-400' : 'bg-accent-400'}`}
                               style={{ width: `${fillPct}%` }}
                             />
                           </div>
@@ -134,7 +138,7 @@ export default function HomeView({
                       <span className="text-xs text-ink-500">Недоступен</span>
                     )}
                     {active && (
-                      <span className="rounded-md bg-gold-400/15 px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-gold-300">
+                      <span className="rounded-md bg-brand-400/15 px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-brand-300">
                         Выбран
                       </span>
                     )}
@@ -149,7 +153,7 @@ export default function HomeView({
             <div>
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="font-display text-lg font-bold text-white">Последние новости</h2>
-                <button className="flex items-center gap-1 text-xs text-gold-300 transition hover:text-gold-200">
+                <button className="flex items-center gap-1 text-xs text-brand-300 transition hover:text-brand-200">
                   Все новости <ChevronRight size={14} />
                 </button>
               </div>
@@ -162,7 +166,7 @@ export default function HomeView({
                   <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-transparent" />
                 </div>
                 <div className="absolute inset-0 flex flex-col justify-center p-6">
-                  <span className="mb-2 w-fit rounded-full bg-gold-400/15 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-gold-300">
+                  <span className="mb-2 w-fit rounded-full bg-brand-400/15 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-brand-300">
                     {featured.category}
                   </span>
                   <h3 className="font-display text-xl font-bold text-white">{featured.title}</h3>
@@ -177,7 +181,7 @@ export default function HomeView({
         <div className="space-y-5">
           {/* Quick play card */}
           <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-ink-800 to-ink-850 p-6">
-            <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gold-400/10 blur-2xl" />
+            <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-brand-400/10 blur-2xl" />
             <h3 className="font-display text-lg font-bold text-white">Быстрый старт</h3>
             <p className="mt-1 text-sm text-ink-400">
               Текущий сервер: <span className="text-ink-100">{server?.name ?? '—'}</span>
@@ -190,34 +194,44 @@ export default function HomeView({
             </div>
             <button
               onClick={onPlay}
-              className="group mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 py-3 font-display text-sm font-bold text-ink-950 transition hover:from-gold-300 hover:to-gold-400"
+              className="group mt-5 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-brand-400 to-brand-500 py-3 font-display text-sm font-bold text-white transition hover:from-brand-300 hover:to-brand-400"
             >
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              <Play size={16} className="fill-ink-950" />
+              <Play size={16} className="fill-white" />
               ИГРАТЬ СЕЙЧАС
             </button>
           </div>
 
-          {/* Patch notes card */}
+          {/* Server status card */}
           <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
-            <h3 className="font-display text-base font-bold text-white">Патчноут 1.8.0</h3>
-            <ul className="mt-3 space-y-2.5 text-sm">
-              {[
-                'Новый район: Останкино',
-                '14 новых автомобилей',
-                'Переработанная экономика',
-                'Система гаражей 2.0',
-                'Исправлено 40+ багов',
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-ink-300">
-                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-gold-400" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="mb-3 flex items-center gap-2">
+              <Server size={18} className="text-brand-300" />
+              <h3 className="font-display text-base font-bold text-white">Статус сервера</h3>
+            </div>
+            <div className="space-y-2.5 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-ink-400">Статус</span>
+                <span className={`flex items-center gap-1.5 font-medium ${server?.online ? 'text-accent-400' : 'text-ink-500'}`}>
+                  <span className={`h-2 w-2 rounded-full ${server?.online ? 'bg-accent-400' : 'bg-ink-500'}`} />
+                  {server?.online ? 'Онлайн' : 'Офлайн'}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-ink-400">IP</span>
+                <span className="font-mono text-xs text-ink-100">{server?.ip ?? '—'}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-ink-400">Игроки</span>
+                <span className="font-mono text-ink-100">{server ? `${server.players}/${server.max_players}` : '—'}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1 text-ink-400"><Wifi size={12} /> Пинг</span>
+                <span className="font-mono text-ink-100">{server?.online ? `${server.ping}ms` : '—'}</span>
+              </div>
+            </div>
             <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3 text-xs text-ink-400">
               <span>Размер обновления</span>
-              <span className="font-mono text-gold-300">{formatBytes(totalSize)}</span>
+              <span className="font-mono text-brand-300">{formatBytes(totalSize)}</span>
             </div>
           </div>
 
@@ -225,24 +239,23 @@ export default function HomeView({
           <div className="rounded-2xl border border-white/5 bg-ink-850 p-6">
             <h3 className="font-display text-base font-bold text-white">Мы в соцсетях</h3>
             <div className="mt-3 space-y-2">
-              {[
-                { name: 'Discord', desc: '3 412 участников', color: 'bg-[#5865F2]' },
-                { name: 'Telegram', desc: '8 901 подписчик', color: 'bg-[#2AABEE]' },
-                { name: 'VK', desc: '12 345 подписчик', color: 'bg-[#0077FF]' },
-              ].map((s, i) => (
-                <button
+              {SOCIALS.map((s, i) => (
+                <a
                   key={i}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex w-full items-center gap-3 rounded-lg p-2.5 transition hover:bg-white/5"
                 >
                   <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${s.color} text-xs font-bold text-white`}>
-                    {s.name[0]}
+                    {s.letter}
                   </span>
                   <div className="text-left">
                     <p className="text-sm font-medium text-ink-100">{s.name}</p>
                     <p className="text-[11px] text-ink-400">{s.desc}</p>
                   </div>
                   <ChevronRight size={14} className="ml-auto text-ink-500" />
-                </button>
+                </a>
               ))}
             </div>
           </div>

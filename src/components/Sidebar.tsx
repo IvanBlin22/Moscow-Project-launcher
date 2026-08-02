@@ -49,11 +49,11 @@ export default function Sidebar({
               style={{ animation: `fadeUp 0.4s ${i * 60}ms both` }}
             >
               {active && (
-                <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-gold-300 to-gold-500" />
+                <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-brand-300 to-brand-500" />
               )}
               <Icon
                 size={18}
-                className={active ? 'text-gold-300' : 'text-ink-400 group-hover:text-ink-200'}
+                className={active ? 'text-brand-300' : 'text-ink-400 group-hover:text-ink-200'}
               />
               {item.label}
             </button>
@@ -74,7 +74,7 @@ export default function Sidebar({
         <p className="font-display text-2xl font-bold text-white">{onlineCount}</p>
         <p className="text-xs text-ink-400">игроков сейчас</p>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-ink-700">
-          <div className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400" style={{ width: `${fillPct}%` }} />
+          <div className="h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-300" style={{ width: `${fillPct}%` }} />
         </div>
       </div>
     </aside>

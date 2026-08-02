@@ -1,4 +1,4 @@
-import { Play, Square, Loader2, CheckCircle2, ChevronDown } from 'lucide-react'
+import { Play, Square, Loader as Loader2, CircleCheck as CheckCircle2, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import type { ServerRow } from '../supabase'
 
@@ -100,7 +100,7 @@ export default function PlayBar({
           )}
           {phase === 'checking' && (
             <div className="flex items-center gap-2 text-sm text-ink-200">
-              <Loader2 size={16} className="animate-spin text-gold-300" />
+              <Loader2 size={16} className="animate-spin text-brand-300" />
               Проверка целостности файлов…
             </div>
           )}
@@ -108,11 +108,11 @@ export default function PlayBar({
             <div className="flex-1">
               <div className="mb-1.5 flex items-center justify-between text-xs">
                 <span className="text-ink-200">Загрузка обновлений · {downloaded}/{totalFiles}</span>
-                <span className="font-mono text-gold-300">{progress}%</span>
+                <span className="font-mono text-brand-300">{progress}%</span>
               </div>
               <div className="h-1.5 overflow-hidden rounded-full bg-ink-700">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-gold-400 to-gold-300 transition-all duration-100"
+                  className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-300 transition-all duration-100"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -120,7 +120,7 @@ export default function PlayBar({
           )}
           {phase === 'launching' && (
             <div className="flex items-center gap-2 text-sm text-ink-200">
-              <Loader2 size={16} className="animate-spin text-gold-300" />
+              <Loader2 size={16} className="animate-spin text-brand-300" />
               Запуск игры…
             </div>
           )}
@@ -137,13 +137,13 @@ export default function PlayBar({
           <button
             onClick={handlePlay}
             disabled={isBusy}
-            className="group relative flex items-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 px-7 py-3 font-display text-sm font-bold text-ink-950 shadow-glow transition-all hover:from-gold-300 hover:to-gold-400 disabled:opacity-70"
+            className="group relative flex items-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-brand-400 to-brand-500 px-7 py-3 font-display text-sm font-bold text-white shadow-glow transition-all hover:from-brand-300 hover:to-brand-400 disabled:opacity-70"
           >
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             {isBusy ? (
               <Loader2 size={18} className="animate-spin" />
             ) : (
-              <Play size={18} className="fill-ink-950" />
+              <Play size={18} className="fill-white" />
             )}
             {phase === 'idle' && 'ИГРАТЬ'}
             {phase === 'checking' && 'ПРОВЕРКА'}
