@@ -1,6 +1,6 @@
-import { Play, Square, Loader as Loader2, CircleCheck as CheckCircle2, ChevronDown } from 'lucide-react'
+import { Play, Square, Loader2, CheckCircle2, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
-import { SERVERS } from '../data'
+import type { ServerRow } from '../supabase'
 
 type Phase = 'idle' | 'checking' | 'ready' | 'downloading' | 'launching' | 'running'
 
@@ -8,15 +8,17 @@ export default function PlayBar({
   onPlay,
   onStop,
   selectedServer,
+  servers,
 }: {
   onPlay: () => void
   onStop: () => void
   selectedServer: number
+  servers: ServerRow[]
 }) {
   const [phase, setPhase] = useState<Phase>('idle')
   const [progress, setProgress] = useState(0)
   const [serverOpen, setServerOpen] = useState(false)
-  const server = SERVERS[selectedServer]
+  const server = servers[selectedServer] ?? servers[0]
 
   const totalFiles = 6
   const downloaded = Math.round((progress / 100) * totalFiles)
@@ -60,21 +62,19 @@ export default function PlayBar({
             onClick={() => setServerOpen((v) => !v)}
             className="flex items-center gap-3 rounded-xl border border-white/5 bg-ink-800 px-4 py-2.5 text-left transition hover:border-white/10"
           >
-            <span className={`h-2 w-2 rounded-full ${server.online ? 'bg-accent-400' : 'bg-ink-500'}`} />
+            <span className={`h-2 w-2 rounded-full ${server?.online ? 'bg-accent-400' : 'bg-ink-500'}`} />
             <div>
-              <p className="text-sm font-semibold text-white">{server.name}</p>
-              <p className="font-mono text-[10px] text-ink-400">{server.ip}</p>
+              <p className="text-sm font-semibold text-white">{server?.name ?? '—'}</p>
+              <p className="font-mono text-[10px] text-ink-400">{server?.ip ?? ''}</p>
             </div>
             <ChevronDown size={16} className={`text-ink-400 transition ${serverOpen ? 'rotate-180' : ''}`} />
           </button>
           {serverOpen && (
             <div className="absolute bottom-full left-0 mb-2 w-72 overflow-hidden rounded-xl border border-white/10 bg-ink-850 shadow-card">
-              {SERVERS.map((s, i) => (
+              {servers.map((s, i) => (
                 <button
-                  key={i}
-                  onClick={() => {
-                    setServerOpen(false)
-                  }}
+                  key={s.id}
+                  onClick={() => setServerOpen(false)}
                   className={`flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-white/5 ${
                     i === selectedServer ? 'bg-white/[0.04]' : ''
                   }`}
@@ -83,7 +83,7 @@ export default function PlayBar({
                   <div className="flex-1">
                     <p className="text-sm font-medium text-ink-100">{s.name}</p>
                     <p className="text-xs text-ink-400">
-                      {s.online ? `${s.players}/${s.maxPlayers} игроков` : 'Недоступен'}
+                      {s.online ? `${s.players}/${s.max_players} игроков` : 'Недоступен'}
                     </p>
                   </div>
                   {s.online && <span className="font-mono text-xs text-ink-400">{s.ping}ms</span>}

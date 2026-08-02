@@ -1,5 +1,6 @@
 import { Home, Newspaper, Image, Users, Settings, type LucideIcon } from 'lucide-react'
 import { View } from '../data'
+import type { LauncherStatRow } from '../supabase'
 
 type NavItem = { id: View; label: string; icon: LucideIcon }
 
@@ -14,10 +15,19 @@ const NAV: NavItem[] = [
 export default function Sidebar({
   view,
   onNavigate,
+  stats,
 }: {
   view: View
   onNavigate: (v: View) => void
+  stats: LauncherStatRow[]
 }) {
+  const onlineStat = stats.find((s) => s.label === 'Игроков онлайн')
+  const onlineCount = onlineStat ? onlineStat.value : '—'
+  const totalPlayers = stats.find((s) => s.label === 'Всего игроков')
+  const maxOnline = totalPlayers ? parseInt(totalPlayers.value.replace(/\s/g, '')) : 2000
+  const onlineNum = parseInt(onlineCount.replace(/\s/g, '')) || 0
+  const fillPct = Math.min((onlineNum / maxOnline) * 100, 100)
+
   return (
     <aside className="flex w-56 flex-col border-r border-white/5 bg-ink-900/80">
       <nav className="flex flex-1 flex-col gap-1 p-3">
@@ -61,10 +71,10 @@ export default function Sidebar({
             Онлайн
           </span>
         </div>
-        <p className="font-display text-2xl font-bold text-white">1 259</p>
+        <p className="font-display text-2xl font-bold text-white">{onlineCount}</p>
         <p className="text-xs text-ink-400">игроков сейчас</p>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-ink-700">
-          <div className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400" style={{ width: '72%' }} />
+          <div className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400" style={{ width: `${fillPct}%` }} />
         </div>
       </div>
     </aside>
